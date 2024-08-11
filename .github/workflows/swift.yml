@@ -1,0 +1,29 @@
+# This workflow will build a Swift project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-swift
+
+on: [push, pull_request]
+
+env:
+  LOG_LEVEL: info
+  DATABASE_USERNAME: vapor_username
+  DATABASE_PASSWORD: vapor_password
+  DATABASE_NAME: vapor_database
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_HOST: postgres
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: vapor_username
+          POSTGRES_PASSWORD: vapor_password
+          POSTGRES_DB: vapor_database
+    container: swift:5.10-focal
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: run tests
+        run: swift test

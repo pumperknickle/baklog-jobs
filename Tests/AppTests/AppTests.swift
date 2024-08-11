@@ -63,7 +63,7 @@ final class AppTests: XCTestCase {
     }
     
     func testTodoDelete() async throws {
-        let testTodos = [BaklogJob(spec: "jobs"), BaklogJob(spec: "test2")]
+        let testTodos = [BaklogJob(spec: "test1"), BaklogJob(spec: "test2")]
         try await testTodos.create(on: app.db)
         
         try await self.app.test(.DELETE, "jobs/\(testTodos[0].requireID())", afterResponse: { res async throws in

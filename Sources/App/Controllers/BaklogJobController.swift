@@ -48,7 +48,7 @@ struct BaklogJobController: RouteCollection {
 
     @Sendable
     func delete(req: Request) async throws -> HTTPStatus {
-        guard let todo = try await BaklogJob.find(req.parameters.get("todoID"), on: req.db) else {
+        guard let todo = try await BaklogJob.find(req.parameters.get("jobID"), on: req.db) else {
             throw Abort(.notFound)
         }
 

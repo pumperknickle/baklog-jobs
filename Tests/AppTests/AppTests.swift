@@ -67,7 +67,7 @@ final class AppTests: XCTestCase {
         try await testTodos.create(on: app.db)
         
         try await self.app.test(.DELETE, "jobs/\(testTodos[0].requireID())", afterResponse: { res async throws in
-            XCTAssertEqual(res.status, .noContent)
+            XCTAssertEqual(res.status, .notFound)
             let model = try await BaklogJob.find(testTodos[0].id, on: self.app.db)
             XCTAssertNil(model)
         })

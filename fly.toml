@@ -20,7 +20,7 @@ primary_region = 'atl'
   processes = ['app']
 
 [[restart]]
-  policy = always
+  policy = "always"
   retries = 3
   processes = ["app"]
 
